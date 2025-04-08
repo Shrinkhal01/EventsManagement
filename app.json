@@ -1,0 +1,7 @@
+{
+  "name": "EventsManagement",
+  "displayName": "EventsManagement",
+  "plugins": [
+    "expo-asset"
+  ]
+}
