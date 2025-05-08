@@ -16,7 +16,7 @@ const mapApi: string = process.env.MAP_API || "";
 Geocoding.init(mapApi);
 
 // Backend API URL - replace with your actual server address
-const API_BASE_URL = 'http://192.168.65.55:4000';
+const API_BASE_URL = process.env.BACKEND_KEY;
 
 // Define an interface for your event structure based on your MongoDB schema
 interface EventLocation {
