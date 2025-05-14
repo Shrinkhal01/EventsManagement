@@ -1,6 +1,8 @@
 // EventForm.tsx
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+
 
 interface EventFormProps {
   media: string | null;
@@ -43,7 +45,7 @@ const EventForm: React.FC<EventFormProps> = ({ media, onClose, location }) => {
         } as any);
       }
 
-      const response = await fetch('http://192.168.65.55:4000/upload', {
+      const response = await fetch(`${process.env.BACKEND_KEY}/upload`, {
         method: 'POST',
         body: formData,
         headers: {
@@ -74,13 +76,17 @@ const EventForm: React.FC<EventFormProps> = ({ media, onClose, location }) => {
         onChangeText={setTitle}
         placeholderTextColor="#999"
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Tags (e.g., Accident, Fire, Roadblock)"
-        value={tags}
-        onChangeText={setTags}
-        placeholderTextColor="#999"
-      />
+      <Picker
+      selectedValue={tags}
+      onValueChange={(itemValue) => setTags(itemValue)}
+      style={styles.input}
+      >
+      <Picker.Item label="Select a Tag..." value="" />
+      <Picker.Item label="Accident" value="Accident" />
+      <Picker.Item label="Fire" value="Fire" />
+      <Picker.Item label="Roadblock" value="Roadblock" />
+      <Picker.Item label="Other" value="Other" />
+      </Picker>
       <View style={styles.buttonRow}>
         <Button title="Submit" onPress={handleSubmit} disabled={isSubmitting} />
         <Button title="Cancel" onPress={onClose} color="#777" />
